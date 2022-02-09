@@ -1,4 +1,4 @@
-/*! @sentry/browser 6.17.6 (448244b10) | https://github.com/getsentry/sentry-javascript */
+/*! @sentry/browser 6.17.6 (bb22de418) | https://github.com/getsentry/sentry-javascript */
 var Sentry = (function (exports) {
   /**
    * TODO(v7): Remove this enum and replace with SeverityLevel
