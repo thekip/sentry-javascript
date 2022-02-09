@@ -4,7 +4,7 @@ packages/*/package-lock.json
 package-lock.json
 
 # build and test
-build/
+# build/
 packages/*/dist/
 packages/*/esm/
 coverage/
