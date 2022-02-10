@@ -159,7 +159,7 @@ function mixinProperties(obj, proto) {
 }
 
 /** An error emitted by Sentry SDKs and related utilities. */
-var SentryError = /** @class */ (function (_super) {
+/** @class */ ((function (_super) {
     __extends(SentryError, _super);
     function SentryError(message) {
         var _newTarget = this.constructor;
@@ -170,7 +170,7 @@ var SentryError = /** @class */ (function (_super) {
         return _this;
     }
     return SentryError;
-}(Error));
+})(Error));
 
 // TODO: Implement different loggers for different environments
 var global$1 = getGlobalObject();
@@ -267,7 +267,7 @@ var Logger = /** @class */ (function () {
 global$1.__SENTRY__ = global$1.__SENTRY__ || {};
 var logger = global$1.__SENTRY__.logger || (global$1.__SENTRY__.logger = new Logger());
 
-var global$2 = getGlobalObject();
+getGlobalObject();
 
 // Slightly modified (no IE8 support, ES6) and transcribed to TypeScript
 // Split a filename into [root, dir, basename, ext], unix version
@@ -381,7 +381,7 @@ var timestampSource = platformPerformance === undefined
 /**
  * Returns a timestamp in seconds since the UNIX epoch using the Date API.
  */
-var dateTimestampInSeconds = dateTimestampSource.nowSeconds.bind(dateTimestampSource);
+dateTimestampSource.nowSeconds.bind(dateTimestampSource);
 /**
  * Returns a timestamp in seconds since the UNIX epoch using either the Performance or Date APIs, depending on the
  * availability of the Performance API.
@@ -400,7 +400,7 @@ var timestampWithMs = timestampInSeconds;
  * The number of milliseconds since the UNIX epoch. This value is only usable in a browser, and only when the
  * performance API is available.
  */
-var browserPerformanceTimeOrigin = (function () {
+((function () {
     // Unfortunately browsers may report an inaccurate time origin data, through either performance.timeOrigin or
     // performance.timing.navigationStart, which results in poor results in performance data. We only treat time origin
     // data as reliable if they are within a reasonable threshold of the current time.
@@ -437,7 +437,7 @@ var browserPerformanceTimeOrigin = (function () {
         }
     }
     return dateNow;
-})();
+}))();
 
 /**
  * Used to extract Tracing integration from the current client,

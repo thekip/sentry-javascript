@@ -124,7 +124,7 @@ function mixinProperties(obj, proto) {
 }
 
 /** An error emitted by Sentry SDKs and related utilities. */
-var SentryError = /** @class */ (function (_super) {
+/** @class */ ((function (_super) {
     __extends(SentryError, _super);
     function SentryError(message) {
         var _newTarget = this.constructor;
@@ -135,12 +135,12 @@ var SentryError = /** @class */ (function (_super) {
         return _this;
     }
     return SentryError;
-}(Error));
+})(Error));
 
 var SeverityLevels = ['fatal', 'error', 'warning', 'log', 'info', 'debug', 'critical'];
 
 // TODO: Implement different loggers for different environments
-var global$1 = getGlobalObject();
+var global$2 = getGlobalObject();
 /** Prefix for logging strings */
 var PREFIX = 'Sentry Logger ';
 /**
@@ -199,7 +199,7 @@ var Logger = /** @class */ (function () {
             return;
         }
         consoleSandbox(function () {
-            global$1.console.log(PREFIX + "[Log]: " + args.join(' '));
+            global$2.console.log(PREFIX + "[Log]: " + args.join(' '));
         });
     };
     /** JSDoc */
@@ -212,7 +212,7 @@ var Logger = /** @class */ (function () {
             return;
         }
         consoleSandbox(function () {
-            global$1.console.warn(PREFIX + "[Warn]: " + args.join(' '));
+            global$2.console.warn(PREFIX + "[Warn]: " + args.join(' '));
         });
     };
     /** JSDoc */
@@ -225,14 +225,14 @@ var Logger = /** @class */ (function () {
             return;
         }
         consoleSandbox(function () {
-            global$1.console.error(PREFIX + "[Error]: " + args.join(' '));
+            global$2.console.error(PREFIX + "[Error]: " + args.join(' '));
         });
     };
     return Logger;
 }());
 // Ensure we only have a single logger instance, even if multiple versions of @sentry/utils are being used
-global$1.__SENTRY__ = global$1.__SENTRY__ || {};
-var logger = global$1.__SENTRY__.logger || (global$1.__SENTRY__.logger = new Logger());
+global$2.__SENTRY__ = global$2.__SENTRY__ || {};
+global$2.__SENTRY__.logger || (global$2.__SENTRY__.logger = new Logger());
 
 /**
  * Join values in array
@@ -315,7 +315,7 @@ function markFunctionWrapped(wrapped, original) {
     addNonEnumerableProperty(wrapped, '__sentry_original__', original);
 }
 
-var global$2 = getGlobalObject();
+getGlobalObject();
 
 /**
  * TODO(v7): Remove this enum and replace with SeverityLevel
@@ -429,7 +429,7 @@ var timestampSource = platformPerformance === undefined
 /**
  * Returns a timestamp in seconds since the UNIX epoch using the Date API.
  */
-var dateTimestampInSeconds = dateTimestampSource.nowSeconds.bind(dateTimestampSource);
+dateTimestampSource.nowSeconds.bind(dateTimestampSource);
 /**
  * Returns a timestamp in seconds since the UNIX epoch using either the Performance or Date APIs, depending on the
  * availability of the Performance API.
@@ -441,12 +441,12 @@ var dateTimestampInSeconds = dateTimestampSource.nowSeconds.bind(dateTimestampSo
  * skew can grow to arbitrary amounts like days, weeks or months.
  * See https://github.com/getsentry/sentry-javascript/issues/2590.
  */
-var timestampInSeconds = timestampSource.nowSeconds.bind(timestampSource);
+timestampSource.nowSeconds.bind(timestampSource);
 /**
  * The number of milliseconds since the UNIX epoch. This value is only usable in a browser, and only when the
  * performance API is available.
  */
-var browserPerformanceTimeOrigin = (function () {
+((function () {
     // Unfortunately browsers may report an inaccurate time origin data, through either performance.timeOrigin or
     // performance.timing.navigationStart, which results in poor results in performance data. We only treat time origin
     // data as reliable if they are within a reasonable threshold of the current time.
@@ -483,9 +483,9 @@ var browserPerformanceTimeOrigin = (function () {
         }
     }
     return dateNow;
-})();
+}))();
 
-var global$3 = getGlobalObject();
+var global$1 = getGlobalObject();
 /** Send Console API calls as Sentry Events */
 var CaptureConsole = /** @class */ (function () {
     /**
@@ -509,15 +509,15 @@ var CaptureConsole = /** @class */ (function () {
      * @inheritDoc
      */
     CaptureConsole.prototype.setupOnce = function (_, getCurrentHub) {
-        if (!('console' in global$3)) {
+        if (!('console' in global$1)) {
             return;
         }
         this._levels.forEach(function (level) {
-            if (!(level in global$3.console)) {
+            if (!(level in global$1.console)) {
                 return;
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            fill(global$3.console, level, function (originalConsoleMethod) { return function () {
+            fill(global$1.console, level, function (originalConsoleMethod) { return function () {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
@@ -549,7 +549,7 @@ var CaptureConsole = /** @class */ (function () {
                 }
                 // this fails for some browsers. :(
                 if (originalConsoleMethod) {
-                    originalConsoleMethod.call(global$3.console, args);
+                    originalConsoleMethod.call(global$1.console, args);
                 }
             }; });
         });
